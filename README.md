@@ -1,25 +1,3 @@
----
-task_categories:
-- text-generation
-language:
-- it
-size_categories:
-- 1K<n<10K
-configs:
-- config_name: italian
-  data_files:
-  - split: test
-    path: medical_school_questions.jsonl
-tags:
-- culture
-- knowledge
-- chemistry
-- biology
-- math
-- reasoning
-pretty_name: Test di Medicina
----
-
 # Medschool-Test, or *"Test di Medicina"*
 
 <p align="center">
@@ -28,9 +6,11 @@ pretty_name: Test di Medicina
 
 ## Is your LLM able to pass a National Entrance Exam for the Italian Medical School?
 
-This the repo for our Huggingface dataset designed for evaluating Language Model (LLM) on a broad range of questions from the **national entrance exams for the Italian medical school**.
+This the GitHub repo for our Huggingface dataset designed for evaluating Language Model (LLM) on a broad range of questions from the **national entrance exams for the Italian medical school**.
 The dataset includes multiple-choice questions from various subjects such as biology, chemistry, physics, mathematics, world knowledge, and more.
 Each question is accompanied by five answer choices, with one correct answer.
+
+The dataset is available on Huggingface! You can find it [here](https://huggingface.co/datasets/room-b007/test-medicina).
 
 ## Features
 
@@ -124,6 +104,20 @@ accelerate launch -m lm_eval \
 This command evaluates the model `meta-llama/Meta-Llama-3.1-8B-Instruct` on the Italian version of the dataset in both multiple-choice and cloze-style formats. The evaluation results are saved in the `outputs/` directory.
 
 Please, refer to the examples in `examples/evaluation` or [lm-evaluation-harness](https://github.com/eleutherai/lm-evaluation-harness) repository for more details on how to use the library.
+
+> [!NOTE]
+> The scores provided by the evaluation script are between -0.4 and 1.5 per each category/domain. To get the final score, you need to calculate the weighted average of the scores obtained across the categories, where the weight of each question depends on the topic of the question (as described in the "Scoring" section above).
+> For example, if the model obtains the following scores:
+> - Biology: 1.0571
+> - Chemistry: 0.7598
+> - Knowledge: 1.0518
+> - Reasoning: 0.2005
+> - Math & Physics: 0.4302
+> The final score is calculated as follows:
+> ```
+> average_per_question = (1.0571 * 0.3833) + (0.7598 * 0.25) + (1.0518 * 0.0667) + (0.2005 * 0.0833) + (0.4302 * 0.2167) = 0.7752
+> overall_score = average_per_question * 60 = 46.51
+> ```
 
 
 ## Data
@@ -285,10 +279,23 @@ where:
 ```
 
 
+### Reproducibility
+We provide the code to reproduce our dataset in the `src/data/collection` directory. The code is written in Python and uses the `beautifulsoup4` library to scrape the questions from the official MIUR website. You can run the code to collect the latest questions from the website and generate the dataset in JSONL format.
 
-## Contributing
+You can run the code using the following command:
 
-Contributions to this dataset are welcome! If you have additional tasks or domains that you would like to include, please submit a pull request.
+```bash
+python src/data/collection/collect_questions.py \
+    --output_path data/questions/medical_school_questions.jsonl \
+    --last_page_index 174
+```
+
+This command collects the questions from the official MIUR website and saves them in the `data/questions/medical_school_questions.jsonl` file. You can specify the number of pages to scrape using the `--last_page_index` argument (where each page contains 20 questions and the last page is 174).
+
+
+## Citation
+> [!NOTE]
+> We are currently writing a report on the dataset and will provide the citation information soon.
 
 
 ## License
