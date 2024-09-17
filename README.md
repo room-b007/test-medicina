@@ -23,7 +23,7 @@ pretty_name: Test di Medicina
 # Medschool-Test, or *"Test di Medicina"*
 
 <p align="center">
-  <img src="test-medicina.jpg" />
+  <img src="assets/images/test-medicina.jpg" />
 </p>
 
 ## Is your LLM able to pass a National Entrance Exam for the Italian Medical School?
