@@ -107,12 +107,14 @@ Please, refer to the examples in `examples/evaluation` or [lm-evaluation-harness
 
 > [!NOTE]
 > The scores provided by the evaluation script are between -0.4 and 1.5 per each category/domain. To get the final score, you need to calculate the weighted average of the scores obtained across the categories, where the weight of each question depends on the topic of the question (as described in the "Scoring" section above).
+>
 > For example, if the model obtains the following scores:
 > - Biology: 1.0571
 > - Chemistry: 0.7598
 > - Knowledge: 1.0518
 > - Reasoning: 0.2005
 > - Math & Physics: 0.4302
+>
 > The final score is calculated as follows:
 > ```
 > average_per_question = (1.0571 * 0.3833) + (0.7598 * 0.25) + (1.0518 * 0.0667) + (0.2005 * 0.0833) + (0.4302 * 0.2167) = 0.7752
