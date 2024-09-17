@@ -1,0 +1,9 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+*.env
+*.log
+
+# Outputs
+outputs/

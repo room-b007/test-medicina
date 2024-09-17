@@ -1,0 +1,9 @@
+group: medschool_test_it_cloze
+task:
+  - medschool_test_it_cloze_bio
+  - medschool_test_it_cloze_chem
+  - medschool_test_it_cloze_know
+  - medschool_test_it_cloze_log
+  - medschool_test_it_cloze_math
+metadata:
+  version: 1

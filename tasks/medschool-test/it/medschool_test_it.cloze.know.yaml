@@ -1,0 +1,4 @@
+include: ../_medschool_test_yaml
+task: medschool_test_it_cloze_know
+process_docs: !function ../utils.process_docs_it_cloze_know
+description: "Rispondi alla seguente domanda. Se rispondi correttamente, otterrai 1.5 punti; se rispondi in modo errato, perderai 0.4 punti. Se non rispondi, non otterrai né perderai punti.\n\n"

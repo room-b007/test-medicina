@@ -1,0 +1,23 @@
+dataset_path: room-b007/test-medicina
+output_type: multiple_choice
+
+test_split: test
+num_fewshot: 0
+
+doc_to_text: "query"
+doc_to_choice: "choices"
+doc_to_target: "gold"
+target_delimiter: ""
+
+process_results: !function utils.process_results
+
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+  - metric: acc_norm
+    aggregation: mean
+    higher_is_better: true
+
+metadata:
+  version: 1.0

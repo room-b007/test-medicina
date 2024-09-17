@@ -1,0 +1,9 @@
+group: medschool_test_it_mc
+task:
+  - medschool_test_it_mc_bio
+  - medschool_test_it_mc_chem
+  - medschool_test_it_mc_know
+  - medschool_test_it_mc_log
+  - medschool_test_it_mc_math
+metadata:
+  version: 1

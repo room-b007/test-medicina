@@ -1,0 +1,4 @@
+include: ../_medschool_test_yaml
+task: medschool_test_it_mc_math
+process_docs: !function ../utils.process_docs_it_mc_math
+description: "Rispondi alla seguente domanda scegliendo la risposta corretta tra le opzioni proposte. Se rispondi correttamente, otterrai 1.5 punti; se rispondi in modo errato, perderai 0.4 punti. Se non rispondi, non otterrai né perderai punti.\n\n"
