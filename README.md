@@ -6,13 +6,30 @@
 
 ## Is your LLM able to pass a National Entrance Exam for the Italian Medical School?
 
-This the GitHub repo for our Huggingface dataset designed for evaluating Language Model (LLM) on a broad range of questions from the **national entrance exams for the Italian medical school**.
+This the GitHub repo for our Hugging Face dataset designed for evaluating Large Language Models (LLMs) on a broad range of questions from the **national entrance exams for the Italian medical school** ([ORIGINAL WEBSITE](https://domande-ap.mur.gov.it/domande)).
 The dataset includes multiple-choice questions from various subjects such as biology, chemistry, physics, mathematics, world knowledge, and more.
-Each question is accompanied by five answer choices, with one correct answer.
+Each question is accompanied by five answer choices, with one correct answer. The following is an example:
 
-The dataset is available on Huggingface! You can find it [here](https://huggingface.co/datasets/room-b007/test-medicina).
+```json
+{
+  "id": 1691,
+  "topic": "biologia",
+  "text": "Come sono definite le cellule staminali che sono in grado di differenziarsi in tutti i tipi di cellule presenti nel corpo umano, ma non possono dare origine ad un organismo completo?",
+  "answers": [
+    "Cellule Staminali Multipotenti",
+    "Cellule Staminali Pluripotenti",
+    "Cellule Staminali Totipotenti",
+    "Cellule Staminali Unipotenti",
+    "Cellule Staminali Oligopotenti"
+  ],
+  "label": 1
+}
+```
+
+**The dataset is available on Hugging Face 🤗!** 👉👉 [LINK](https://huggingface.co/datasets/room-b007/test-medicina) 👈👈.
 
 ## Features
+- **Italian (and English coming soon)**: The dataset is currently available in Italian, with an English version coming soon.
 
 - **Multiple topics**: Questions cover a wide range of subjects, including biology, chemistry, physics, mathematics, world knowledge (with a focus on Italian culture), and more.
 
@@ -23,9 +40,6 @@ The dataset is available on Huggingface! You can find it [here](https://huggingf
   - **Cloze-style**: The question is NOT followed by answer choices. The evaluation metric is based on the model's ability to generate the correct answer when presented with the question only.
 
 - **Large-scale**: The dataset contains over 3K high-quality questions, making it suitable for the evaluation of LLMs.
-
-- **Italian (and English coming soon)**: The dataset is currently available in Italian, with an English version coming soon.
-
 
 ## Evaluation
 
@@ -106,9 +120,9 @@ This command evaluates the model `meta-llama/Meta-Llama-3.1-8B-Instruct` on the 
 Please, refer to the examples in `examples/evaluation` or [lm-evaluation-harness](https://github.com/eleutherai/lm-evaluation-harness) repository for more details on how to use the library.
 
 > [!NOTE]
-> The scores provided by the evaluation script are between -0.4 and 1.5 per each category/domain. To get the final score, you need to calculate the weighted average of the scores obtained across the categories, where the weight of each question depends on the topic of the question (as described in the "Scoring" section above).
+> The scores provided by the evaluation script are 5, one for each subject, and they are between -0.4 and 1.5. They, the subject-scores, are computed as the average score over all the questions for each specific subject. To get the final score, you need to calculate the weighted average of the subject-scores, where the weight of each subject-score depends on the subject itself (as described in the "Scoring" section above).
 >
-> For example, if the model obtains the following scores:
+> For example, if the model obtains the following subject-scores:
 > - Biology: 1.0571
 > - Chemistry: 0.7598
 > - Knowledge: 1.0518
@@ -117,16 +131,17 @@ Please, refer to the examples in `examples/evaluation` or [lm-evaluation-harness
 >
 > The final score is calculated as follows:
 > ```
-> average_per_question = (1.0571 * 0.3833) + (0.7598 * 0.25) + (1.0518 * 0.0667) + (0.2005 * 0.0833) + (0.4302 * 0.2167) = 0.7752
+> average_score_per_question = (1.0571 * 0.3833) + (0.7598 * 0.25) + (1.0518 * 0.0667) + (0.2005 * 0.0833) + (0.4302 * 0.2167) = 0.7752
 > overall_score = average_per_question * 60 = 46.51
 > ```
+> The maximum possible score is 90 = 60 * 1.5, when all the answers are correct, while the minum score is -24 = 60 * -0.4, when all the answers are incorrect.
 
 
 ## Data
 
 ### Source
 
-The dataset is collected from the official Italian website of the Ministry of Education, University and Research ([MIUR](https://www.miur.gov.it/)), which hosts a large collection of past entrance exams for medical school in Italy. The dataset includes questions from various subjects, such as biology, chemistry, physics, mathematics, world knowledge, and more. You can find the original dataset [here](https://domande-ap.mur.gov.it/domande).
+The dataset is collected from the official Italian website of the Ministry of Education, University and Research ([MIUR](https://www.miur.gov.it/)), which hosts a large collection of past entrance exams for medical school in Italy. The dataset includes questions from various subjects, such as biology, chemistry, physics, mathematics, world knowledge, and more. You can find the original dataset [HERE](https://domande-ap.mur.gov.it/domande).
 
 ### Composition
 
