@@ -134,7 +134,7 @@ Please, refer to the examples in `examples/evaluation` or [lm-evaluation-harness
 > average_score_per_question = (1.0571 * 0.3833) + (0.7598 * 0.25) + (1.0518 * 0.0667) + (0.2005 * 0.0833) + (0.4302 * 0.2167) = 0.7752
 > overall_score = average_per_question * 60 = 46.51
 > ```
-> The maximum possible score is 90 = 60 * 1.5, when all the answers are correct, while the minum score is -24 = 60 * -0.4, when all the answers are incorrect.
+> The <u> maximum possible score is 90 = 60 * 1.5 </u>, when all the answers are correct, while the <u> minum score is -24 = 60 * -0.4 </u>, when all the answers are incorrect.
 
 
 ## Data
